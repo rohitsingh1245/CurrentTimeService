@@ -1,4 +1,4 @@
-name:Publish 🚀
+name: Publish 🚀
 
 on:
   workflow_dispatch:
@@ -11,20 +11,20 @@ jobs:
       runs-on: ubantu-latest
       
       steps:
-        - uses:action/checkout@v3
+        - uses: action/checkout@v3
         
-        - name:Setup.NET
-        - uses:action/setup-dotnet@v3
+        - name: Setup.NET
+        - uses: action/setup-dotnet@v3
           with:
             dotnet-version: '6.0.x'
             
-        - name:Restore
+        - name: Restore
         - run: dotnet restore ./CurrentTimeService.sln
         
-        - name:Build
-        - run: dotnet build./CurrentTimeService.sln --configuration Release --no restore
+        - name: Build
+        - run: dotnet build./CurrentTimeService.sln --configuration Release --no-restore
         
-        - name:Publish
-        - run:dotnet publish ./CurrentTimeService.sln --configration Release --no build
+        - name: Publish
+        - run: dotnet publish ./CurrentTimeService.sln --configration Release --no-build
         
       
