@@ -8,23 +8,23 @@ on:
 
 jobs:
   publish:
-      runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v3
       
-      steps:
-        - uses: actions/checkout@v3
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '6.0.x'
+          
+      - name: Restore
+        run: dotnet restore ./CurrentTimeService.sln
         
-        - name: Setup .NET
-        - uses: actions/setup-dotnet@v3
-          with:
-            dotnet-version: '6.0.x'
-            
-        - name: Restore
-        - run: dotnet restore ./CurrentTimeService.sln
+      - name: Build
+        run: dotnet build ./CurrentTimeService.sln --configuration Release --no-restore
         
-        - name: Build
-        - run: dotnet build ./CurrentTimeService.sln --configuration Release --no-restore
-        
-        - name: Publish
-        - run: dotnet publish ./CurrentTimeService.sln --configration Release --no-build
+      - name: Publish
+        run: dotnet publish ./CurrentTimeService.sln --configuration Release --no-build
         
       
