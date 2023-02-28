@@ -1,8 +1,3 @@
-# ASP.NET Core (.NET Framework)
-# Build and test ASP.NET Core projects targeting the full .NET Framework.
-# Add steps that publish symbols, save build artifacts, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
-
 trigger:
 - main
 
@@ -18,13 +13,11 @@ steps:
     bucketName: 'CurrentTimeServiceBucket'
     sourceFolder: 'CurrentTimeService'
     globExpressions: '**'
-    createBucket: true   
--
+    createBucket: true
 - task: CloudFormationCreateOrUpdateStack@1
   inputs:
     awsCredentials: 'AWS-S3 Connection'
     regionName: 'us-east-1'
     stackName: 'CurrentTimeServiceDemo'
     templateSource: 's3'
-    s3BucketName: 'DevOpsDemo'
-      
+    s3BucketName: 'DevOpsDemo'      
